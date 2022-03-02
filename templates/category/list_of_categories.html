@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}
+    List of Categories
+{% endblock %}
+{% block content %}
+    <div class="container-fluid col-md-8">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created at</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in all_categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description }}</td>
+                    <td>{{ category.created_at }}</td>
+                    {% if perms.category.change_category %}
+                        <td><a href="{% url 'update_categories' category.id %}" class="btn btn-primary">Update</a></td>
+                    {% endif %}
+                    {% if perms.category.delete_category %}
+                        <td><a href="{% url 'delete_categories' category.id %}" class="btn btn-danger">Delete</a></td>
+                    {% endif %}
+                    <td><a href="{% url 'details_category' category.id %}" class="btn btn-danger">Details</a></td>
+                    {% if perms.category.delete_category_by_popup %}
+                        <td>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal_{{ category.id }}">
+                            Delete-pop
+                        </button>
+                    {% endif %}
+                    <div class="modal fade" id="exampleModal_{{ category.id }}" tabindex="-1"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ category.name }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Do you want to delete the category {{ category.name }} ?
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <a href="{% url 'delete_with_popup' category.id %}"
+                                       class="btn btn-danger">Delete</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

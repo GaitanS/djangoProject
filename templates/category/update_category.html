@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+Update
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div>
+                    <h1 class="text-center">Update categories</h1>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary ">Update category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

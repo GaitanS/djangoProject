@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %} All cars {% endblock %}
+{% block content %}
+{% for car in cars %}
+    <p>Name: {{ car.name }}</p>
+    <p>Was the car in an accident? : {{ car.damaged }}</p>
+    <p>Age: {{ car.year }}</p>
+{% endfor %}
+<a href="{% url 'all_students' %}">Go to list of students</a>
+{% endblock %}

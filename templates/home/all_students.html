@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} All students {% endblock %}
+{% block content %}
+    {% for student in all_students %}
+    {% if student.is_olympic is True %}
+        <p>Name: {{ student.name }}</p>
+        <p>Is olympic: {{ student.is_olympic }}</p>
+        <p>Age: {{ student.age }}</p>
+    {% endif %}
+{% endfor %}
+<a href="{% url 'cars1' %}">Go to list of cars</a>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Students</title>
+</head>
+<body>
+{% for student in all_students %}
+    {% if student.is_olympic is True %}
+        <p>Name: {{ student.name }}</p>
+        <p>Is olympic: {{ student.is_olympic }}</p>
+        <p>Age: {{ student.age }}</p>
+    {% endif %}
+{% endfor %}
+<a href="{% url 'cars1' %}">Go to list of cars</a>
+</body>
+</html>
